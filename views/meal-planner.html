@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner - FlavorFusion</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/meal-planner.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/theme.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">FlavorFusion</div>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/add-recipe">Add Recipe</a></li>
+                <li><a href="/recipes">Browse Recipes</a></li>
+                <li><a href="/meal-planner">Meal Planner</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li>
+                    <button id="themeToggle" class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="meal-planner-container">
+        <div class="planner-header">
+            <h1>Meal Planner</h1>
+            <div class="week-navigation">
+                <button id="prevWeek"><i class="fas fa-chevron-left"></i></button>
+                <h2 id="weekDisplay"></h2>
+                <button id="nextWeek"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <div class="meal-grid">
+            <!-- Days will be populated here -->
+        </div>
+
+        <div class="recipe-selector" id="recipeSelector">
+            <div class="selector-header">
+                <h3>Select Recipe</h3>
+                <input type="text" id="recipeSearch" placeholder="Search recipes...">
+            </div>
+            <div class="recipe-list" id="recipeList">
+                <!-- Recipes will be populated here -->
+            </div>
+        </div>
+
+        <div class="shopping-list">
+            <h3>Shopping List for the Week</h3>
+            <div id="shoppingList">
+                <!-- Shopping list will be populated here -->
+            </div>
+            <button id="downloadList" class="download-btn">
+                <i class="fas fa-download"></i> Download Shopping List
+            </button>
+        </div>
+    </main>
+
+    <script src="/js/meal-planner.js"></script>
+    <script src="/js/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f4f4f4;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --accent-color: #4a90e2;
+    --border-color: #dddddd;
+    --card-bg: #ffffff;
+    --nav-bg: #333333;
+    --nav-text: #ffffff;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --accent-color: #64b5f6;
+    --border-color: #404040;
+    --card-bg: #2d2d2d;
+    --nav-bg: #000000;
+    --nav-text: #ffffff;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Update existing components with variables */
+header {
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+}
+
+.card, .recipe-card, .blog-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+input, textarea, select {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--nav-text);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
+
+.theme-toggle:hover {
+    color: var(--accent-color);
+}

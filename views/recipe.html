@@ -1,0 +1,23 @@
+<!-- Add this before the closing main tag -->
+    <section class="reviews-section">
+        <h2>Reviews</h2>
+        
+        <form id="reviewForm" class="review-form">
+            <div class="rating-input">
+                <input type="hidden" id="ratingValue" value="0">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <textarea id="reviewComment" placeholder="Share your thoughts about this recipe..." required></textarea>
+            <button type="submit">Submit Review</button>
+        </form>
+
+        <div id="reviewsContainer" class="reviews-container">
+            <!-- Reviews will be loaded here -->
+        </div>
+    </section>
+
+    <script src="/js/recipe-reviews.js"></script>

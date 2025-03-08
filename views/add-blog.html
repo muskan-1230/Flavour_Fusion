@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write Blog - FlavorFusion</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/blog.css">
+    <link rel="stylesheet" href="/css/add-blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/css/theme.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">FlavorFusion</div>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/add-recipe">Add Recipe</a></li>
+                <li><a href="/recipes">Browse Recipes</a></li>
+                <li><a href="/meal-planner">Meal Planner</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li>
+                    <button id="themeToggle" class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="blog-form-container">
+        <form id="blogForm" class="blog-form">
+            <h2>Write a Blog Post</h2>
+            
+            <div class="form-group">
+                <input type="text" id="title" placeholder="Blog Title" required>
+            </div>
+
+            <div class="form-group">
+                <textarea id="content" placeholder="Write your blog content..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <input type="file" id="blogImage" accept="image/*">
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="tags" placeholder="Tags (comma separated)">
+            </div>
+
+            <button type="submit">Publish Blog</button>
+        </form>
+    </main>
+
+    <script src="/js/add-blog.js"></script>
+    <script src="/js/theme.js"></script>
+</body>
+</html>

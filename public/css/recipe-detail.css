@@ -1,0 +1,470 @@
+.recipe-detail-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 20px;
+}
+
+.recipe-content {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.recipe-title {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.recipe-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.recipe-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.recipe-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.recipe-description {
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.recipe-section {
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.ingredients-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ingredients-list li {
+    color: var(--text-primary);
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ingredients-list li::before {
+    content: "•";
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.instructions-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: instruction;
+}
+
+.instructions-list li {
+    color: var(--text-primary);
+    padding: 1rem 0;
+    display: flex;
+    gap: 1rem;
+    line-height: 1.6;
+}
+
+.instructions-list li::before {
+    counter-increment: instruction;
+    content: counter(instruction);
+    min-width: 25px;
+    height: 25px;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.recipe-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.ingredients-list, .instructions-list {
+    margin: 2rem 0;
+}
+
+.rating-section {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.rating-section, .comments-section {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stars {
+    display: inline-flex;
+    gap: 0.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+    margin: 1rem 0;
+}
+
+.stars i {
+    color: #ddd;
+    transition: all 0.2s ease;
+}
+
+.stars i.active,
+.stars i:hover,
+.stars i:hover ~ i {
+    color: #ffd700;
+}
+
+.average-rating {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+#averageRating {
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+#commentForm textarea {
+    width: 100%;
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+#commentForm button {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#commentForm button:hover {
+    background: var(--accent-color-dark);
+}
+
+.comment {
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.comment p {
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+.comment {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.share-section {
+    margin: 2rem 0;
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.share-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.share-btn:hover {
+    transform: scale(1.1);
+}
+
+.facebook {
+    background-color: #3b5998;
+}
+
+.twitter {
+    background-color: #1da1f2;
+}
+
+.whatsapp {
+    background-color: #25d366;
+}
+
+.copy-link {
+    background-color: #666;
+}
+
+.share-success {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 4px;
+    animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.qr-code-section {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+#qrcode {
+    display: inline-block;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+}
+
+#qrcode img {
+    display: block;
+}
+
+.favorite-section {
+    text-align: right;
+    margin: 1rem 0;
+}
+
+.favorite-btn {
+    background: none;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.favorite-btn:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.favorite-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.favorite-btn i {
+    font-size: 1.2rem;
+}
+
+.comments-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+}
+
+.comment-form {
+    margin-bottom: 2rem;
+}
+
+#commentText {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    resize: vertical;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.comment {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-primary);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.comment-date {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.comment-text {
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+.no-comments {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 1rem;
+}
+
+#commentForm button {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#commentForm button:hover {
+    background-color: var(--accent-color-dark);
+}
+.print {
+    background-color: #444;
+}
+
+.print:hover {
+    background-color: #333;
+}
+.nutrition-facts {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nutrition-facts h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.nutrition-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    text-align: center;
+}
+
+.nutrition-item {
+    padding: 1rem;
+    background: var(--bg-primary);
+    border-radius: 6px;
+    transition: transform 0.2s ease;
+}
+
+.nutrition-item:hover {
+    transform: translateY(-3px);
+}
+
+.nutrition-item .value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.nutrition-item .label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .nutrition-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

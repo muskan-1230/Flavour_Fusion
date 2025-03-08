@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FlavorFusion</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- Keep existing navbar -->
+    <header>
+        <nav>
+            <div class="logo">FlavorFusion</div>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/add-recipe">Add Recipe</a></li>
+                <li><a href="/recipes">Browse Recipes</a></li>
+                <li><a href="/meal-planner">Meal Planner</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li>
+                    <button id="themeToggle" class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Welcome Back, <span id="userName">Chef</span>!</h1>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Recipes</h3>
+                <div class="stat-value" id="totalRecipes">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Favorite Recipes</h3>
+                <div class="stat-value" id="favoriteRecipes">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Average Rating</h3>
+                <div class="stat-value" id="averageRating">0.0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Recipe Views</h3>
+                <div class="stat-value" id="recipeViews">0</div>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="main-content">
+                <div class="recipe-of-day">
+                    <div class="section-header">
+                        <h2>Recipe of the Day</h2>
+                    </div>
+                    <div class="featured-recipe" id="recipeOfDay">
+                        <!-- Recipe of the day content will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <div class="my-favorites">
+                    <div class="section-header">
+                        <h2>My Favorite Recipes</h2>
+                    </div>
+                    <div class="favorites-grid" id="favoritesGrid">
+                        <!-- Favorite recipes will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="quick-actions">
+                    <div class="section-header">
+                        <h2>Quick Actions</h2>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="window.location.href='/add-recipe'">
+                            <i class="fas fa-plus"></i>
+                            Add New Recipe
+                        </button>
+                        <button class="action-btn" onclick="window.location.href='/meal-planner'">
+                            <i class="fas fa-calendar-alt"></i>
+                            Meal Planner
+                        </button>
+                        <button class="action-btn" onclick="window.location.href='/shopping-list'">
+                            <i class="fas fa-shopping-cart"></i>
+                            Shopping List
+                        </button>
+                        <button class="action-btn" onclick="window.location.href='/profile'">
+                            <i class="fas fa-user-edit"></i>
+                            Edit Profile
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/theme.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

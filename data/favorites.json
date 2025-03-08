@@ -1,0 +1,24 @@
+{
+  "favorites": [
+    {
+      "userId": "kanav@gmail.com",
+      "recipeId": "1741423701197",
+      "createdAt": "2025-03-08T08:49:32.621Z"
+    },
+    {
+      "userId": "kanav@gmail.com",
+      "recipeId": "1741422287504",
+      "createdAt": "2025-03-08T09:14:37.102Z"
+    },
+    {
+      "userId": "kanav@gmail.com",
+      "recipeId": "1741428104233",
+      "createdAt": "2025-03-08T10:01:51.072Z"
+    },
+    {
+      "userId": "kanav@gmail.com",
+      "recipeId": "1741428289270",
+      "createdAt": "2025-03-08T10:07:48.839Z"
+    }
+  ]
+}

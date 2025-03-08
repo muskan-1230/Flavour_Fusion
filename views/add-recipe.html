@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe - FlavorFusion</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/add-recipe.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/theme.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">FlavorFusion</div>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/add-recipe">Add Recipe</a></li>
+                <li><a href="/recipes">Browse Recipes</a></li>
+                <li><a href="/meal-planner">Meal Planner</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li>
+                    <button id="themeToggle" class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="add-recipe-container">
+        <h1>Add New Recipe</h1>
+        <form id="recipeForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Recipe Title*</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="recipeImage">Recipe Image</label>
+                <div class="file-input-container">
+                    <label class="file-input-label">
+                        Choose Image
+                        <input type="file" id="recipeImage" name="recipeImage" accept="image/*" required style="display: none;">
+                    </label>
+                    <div class="selected-file-name"></div>
+                </div>
+                <div id="imagePreview" class="image-preview"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description*</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="ingredients">Ingredients* (one per line)</label>
+                <textarea id="ingredients" name="ingredients" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="instructions">Instructions* (one per line)</label>
+                <textarea id="instructions" name="instructions" required></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="prepTime">Preparation Time (minutes)*</label>
+                    <input type="number" id="prepTime" name="prepTime" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dietaryType">Dietary Type*</label>
+                    <select id="dietaryType" name="dietaryType" required>
+                        <option value="veg">Vegetarian</option>
+                        <option value="non-veg">Non-Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Add Recipe</button>
+        </form>
+    </main>
+
+    <script src="/js/theme.js"></script>
+    <script src="/js/add-recipe.js"></script>
+</body>
+</html>

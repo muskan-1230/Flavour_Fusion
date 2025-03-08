@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= post.title %> - FlavorFusion Blog</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/blog.css">
+    <link rel="stylesheet" href="/css/blog-interactions.css">
+    <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/single-post.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- Add right after body tag -->
+    <div class="reading-progress">
+        <div class="reading-progress-bar"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <%- include('partials/header') %>
+
+    <main class="single-post-container">
+        <!-- Add after post-header div -->
+        <div class="sidebar">
+            <div class="table-of-contents">
+                <h4>Table of Contents</h4>
+                <ul class="toc-list"></ul>
+            </div>
+        </div>
+        <article class="single-post" data-post-id="<%= post._id %>">
+            <div class="post-header">
+                <div class="post-meta">
+                    <span class="category"><%= post.category %></span>
+                    <h1><%= post.title %></h1>
+                    <div class="author-info">
+                        <img src="<%= post.author.avatar %>" alt="<%= post.author.name %>" class="author-avatar">
+                        <div class="author-details">
+                            <span class="author-name">By <%= post.author.name %></span>
+                            <span class="post-date"><%= new Date(post.createdAt).toLocaleDateString() %></span>
+                        </div>
+                    </div>
+                    <div class="post-stats">
+                        <span><i class="fas fa-eye"></i> <%= post.views %> views</span>
+                        <span><i class="fas fa-clock"></i> <%= post.readTime %> min read</span>
+                    </div>
+                </div>
+                <div class="featured-image">
+                    <img src="<%= post.image %>" alt="<%= post.title %>">
+                </div>
+            </div>
+
+            <div class="post-content">
+                <%- post.content %>
+            </div>
+
+            <div class="post-tags">
+                <% post.tags.forEach(tag => { %>
+                    <span class="tag">#<%= tag %></span>
+                <% }); %>
+            </div>
+
+            <div class="post-interactions">
+                <button class="like-button <%= isLikedByUser ? 'liked' : '' %>" data-post-id="<%= post._id %>">
+                    <i class="<%= isLikedByUser ? 'fas' : 'far' %> fa-heart"></i>
+                    <span class="like-count"><%= post.likes.length %></span>
+                </button>
+
+                <div class="social-share">
+                    <button class="share-btn facebook" data-platform="facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button class="share-btn twitter" data-platform="twitter">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                    <button class="share-btn pinterest" data-platform="pinterest">
+                        <i class="fab fa-pinterest-p"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="author-bio">
+                <img src="<%= post.author.avatar %>" alt="<%= post.author.name %>">
+                <div class="bio-content">
+                    <h3>About <%= post.author.name %></h3>
+                    <p><%= post.author.bio %></p>
+                    <a href="/blog/author/<%= post.author._id %>" class="author-link">View all posts</a>
+                </div>
+            </div>
+
+            <div class="comments-section">
+                <h3>Comments (<span class="comment-count"><%= comments.length %></span>)</h3>
+                <% if (locals.user) { %>
+                    <form id="commentForm" class="comment-form" data-post-id="<%= post._id %>">
+                        <textarea placeholder="Share your thoughts..." required></textarea>
+                        <button type="submit">Post Comment</button>
+                    </form>
+                <% } else { %>
+                    <div class="login-prompt">
+                        <p>Please <a href="/login">login</a> to leave a comment.</p>
+                    </div>
+                <% } %>
+
+                <div class="comments-container">
+                    <% if (post.comments && post.comments.length > 0) { %>
+                        <% post.comments.forEach(comment => { %>
+                            <div class="comment" data-comment-id="<%= comment._id %>">
+                                <div class="comment-header">
+                                    <img src="<%= comment.user.avatar %>" alt="<%= comment.user.name %>" class="comment-avatar">
+                                    <div class="comment-meta">
+                                        <h4><%= comment.user.name %></h4>
+                                        <span><%= new Date(comment.createdAt).toLocaleDateString() %></span>
+                                    </div>
+                                </div>
+                                <div class="comment-content">
+                                    <%= comment.content %>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <p class="no-comments">No comments yet. Be the first to share your thoughts!</p>
+                    <% } %>
+                </div>
+            </div>
+        </article>
+
+        <section class="related-posts-section">
+            <h2>Related Posts</h2>
+            <div class="related-posts">
+                <% relatedPosts.forEach(relatedPost => { %>
+                    <article class="related-post">
+                        <img src="<%= relatedPost.image %>" alt="<%= relatedPost.title %>">
+                        <div class="related-post-content">
+                            <h3><a href="/blog/<%= relatedPost._id %>"><%= relatedPost.title %></a></h3>
+                            <div class="post-meta">
+                                <span><i class="fas fa-user"></i> <%= relatedPost.author.name %></span>
+                                <span><i class="fas fa-calendar"></i> <%= new Date(relatedPost.createdAt).toLocaleDateString() %></span>
+                            </div>
+                        </div>
+                    </article>
+                <% }); %>
+            </div>
+        </section>
+    </main>
+    
+    <%- include('partials/footer') %>
+    
+    <script src="/js/blog-interactions.js"></script>
+    <script src="/js/theme.js"></script>
+    <script src="/js/single-post.js"></script>
+</body>
+</html>

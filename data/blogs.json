@@ -1,0 +1,17 @@
+{
+  "blogs": [
+    {
+      "id": "1741422826549",
+      "title": "adad",
+      "content": "adadads",
+      "tags": [
+        "wfafa",
+        "adasdasd"
+      ],
+      "author": "Kanav5753",
+      "authorId": "kanav@gmail.com",
+      "createdAt": "2025-03-08T08:33:46.549Z",
+      "likes": 0
+    }
+  ]
+}

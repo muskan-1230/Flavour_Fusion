@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Recipes - FlavorFusion</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/recipes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/theme.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">FlavorFusion</div>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/add-recipe">Add Recipe</a></li>
+                <li><a href="/recipes">Browse Recipes</a></li>
+                <li><a href="/meal-planner">Meal Planner</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li>
+                    <button id="themeToggle" class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="recipes-container">
+        <div class="search-filters">
+            <input type="text" id="searchInput" placeholder="Search recipes...">
+            <select id="dietaryFilter">
+                <option value="">All Types</option>
+                <option value="veg">Vegetarian</option>
+                <option value="non-veg">Non-Vegetarian</option>
+                <option value="vegan">Vegan</option>
+            </select>
+        </div>
+
+        <div class="recipe-grid" id="recipesContainer">
+            <!-- Recipes will be loaded here -->
+        </div>
+    </main>
+
+    <script src="/js/theme.js"></script>
+    <script src="/js/recipes.js"></script>
+</body>
+</html>

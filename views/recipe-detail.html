@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Details - FlavorFusion</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/recipe-detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">FlavorFusion</div>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/add-recipe">Add Recipe</a></li>
+                <li><a href="/recipes">Browse Recipes</a></li>
+                <li><a href="/meal-planner">Meal Planner</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li>
+                    <button id="themeToggle" class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="recipe-detail-container">
+        <div class="recipe-header">
+            <h1 id="recipeTitle"></h1>
+            <div class="favorite-section">
+                <button id="favoriteBtn" class="favorite-btn">
+                    <i class="far fa-heart"></i>
+                    <span>Add to Favorites</span>
+                </button>
+            </div>
+        </div>
+        
+        <div id="recipeContent">
+            <!-- Recipe content will be loaded here -->
+        </div>
+
+        <div class="recipe-interactions">
+            <!-- Add this inside the recipe-content div -->
+            <div class="rating-section">
+                <h3>Rate this Recipe</h3>
+                <div class="stars">
+                    <i class="far fa-star" data-rating="1"></i>
+                    <i class="far fa-star" data-rating="2"></i>
+                    <i class="far fa-star" data-rating="3"></i>
+                    <i class="far fa-star" data-rating="4"></i>
+                    <i class="far fa-star" data-rating="5"></i>
+                </div>
+                <div class="rating-info">
+                    <span id="averageRating">0</span>/5 (<span id="totalRatings">0</span> ratings)
+                </div>
+            </div>
+
+            <div class="share-section">
+                <h3>Share this Recipe</h3>
+                <div class="share-buttons">
+                    <button onclick="shareRecipe('facebook')" class="share-btn facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button onclick="shareRecipe('twitter')" class="share-btn twitter">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                    <button onclick="shareRecipe('whatsapp')" class="share-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </button>
+                    <button onclick="copyLink()" class="share-btn copy-link">
+                        <i class="fas fa-link"></i>
+                    </button>
+                    <button onclick="printRecipe()" class="share-btn print">
+                        <i class="fas fa-print"></i>
+                    </button>
+                </div>
+                <div class="qr-code-section">
+                    <h4>Scan to View Recipe</h4>
+                    <div id="qrcode"></div>
+                </div>
+            </div>
+
+            <div class="comments-section">
+                <h3>Comments</h3>
+                <form id="commentForm">
+                    <textarea id="commentText" placeholder="Add a comment..." required></textarea>
+                    <button type="submit">Post Comment</button>
+                </form>
+                <div id="commentsContainer"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add this after the recipe-meta div and before recipe-section -->
+    <div class="nutrition-facts">
+        <h3>Nutrition Facts</h3>
+        <div class="nutrition-grid">
+            <div class="nutrition-item">
+                <span class="value">350</span>
+                <span class="label">Calories</span>
+            </div>
+            <div class="nutrition-item">
+                <span class="value">12g</span>
+                <span class="label">Protein</span>
+            </div>
+            <div class="nutrition-item">
+                <span class="value">45g</span>
+                <span class="label">Carbs</span>
+            </div>
+            <div class="nutrition-item">
+                <span class="value">15g</span>
+                <span class="label">Fat</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>FlavourFusion - Your ultimate destination for culinary inspiration and food adventures.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/recipes">Recipes</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/meal-planner">Meal Planner</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FlavourFusion. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/js/recipe-detail.js"></script>
+    <script src="/js/recipe-interactions.js"></script>
+    <script src="/js/theme.js"></script>
+</body>
+</html>

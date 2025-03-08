@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlavorFusion Blog</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/blog.css">
+    <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">FlavorFusion</div>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/add-recipe">Add Recipe</a></li>
+                <li><a href="/recipes">Browse Recipes</a></li>
+                <li><a href="/meal-planner">Meal Planner</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li>
+                    <button id="themeToggle" class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="blog-container">
+        <div class="blog-header">
+            <h1>FlavorFusion Blog</h1>
+            <div class="blog-actions">
+                <button id="addPostBtn" class="add-post-btn">
+                    <i class="fas fa-plus"></i> Add New Post
+                </button>
+                <div class="blog-filters">
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                    </select>
+                    <input type="text" id="searchBlog" placeholder="Search blogs...">
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-grid" id="blogPosts">
+            <!-- Blog posts will be dynamically inserted here -->
+        </div>
+
+        <div id="loadMore" class="load-more">
+            <button>Load More Posts</button>
+        </div>
+    </main>
+
+    <script src="/js/blog.js"></script>
+    <!-- Add before closing body tag -->
+    <div class="modal-overlay" id="postFormModal">
+        <div class="post-form-modal">
+            <h2>Create New Blog Post</h2>
+            <form id="postForm" class="post-form">
+                <div class="form-group">
+                    <label for="postTitle">Title</label>
+                    <input type="text" id="postTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="postCategory">Category</label>
+                    <select id="postCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="Seasonal Cooking">Seasonal Cooking</option>
+                        <option value="Kitchen Tips">Kitchen Tips</option>
+                        <option value="Healthy Eating">Healthy Eating</option>
+                        <option value="Recipe Reviews">Recipe Reviews</option>
+                        <option value="Cooking Techniques">Cooking Techniques</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="postContent">Content</label>
+                    <textarea id="postContent" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelPost">Cancel</button>
+                    <button type="submit" class="submit-btn">Create Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+          <div class="footer-section">
+              <h3>About Us</h3>
+              <p>FlavourFusion - Your ultimate destination for culinary inspiration and food adventures.</p>
+          </div>
+          <div class="footer-section">
+              <h3>Quick Links</h3>
+              <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/recipes">Recipes</a></li>
+                  <li><a href="/blog">Blog</a></li>
+                  <li><a href="/meal-planner">Meal Planner</a></li>
+              </ul>
+          </div>
+          <div class="footer-section">
+              <h3>Connect With Us</h3>
+              <div class="social-links">
+                  <a href="#"><i class="fab fa-facebook"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="#"><i class="fab fa-pinterest"></i></a>
+              </div>
+          </div>
+      </div>
+      <div class="footer-bottom">
+          <p>&copy; 2024 FlavourFusion. All rights reserved.</p>
+      </div>
+    </footer>
+</body>
+</html>
