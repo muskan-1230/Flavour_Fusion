@@ -1,4 +1,12 @@
+/* Add Google Fonts import at the top */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
 :root {
+    /* Add font variables */
+    --font-primary: 'Poppins', sans-serif;
+    --font-secondary: 'Montserrat', sans-serif;
+    
+    /* Existing variables */
     --bg-primary: #ffffff;
     --bg-secondary: #f4f4f4;
     --text-primary: #333333;
@@ -22,10 +30,17 @@
     --nav-text: #ffffff;
 }
 
+/* Add base font styles */
 body {
+    font-family: var(--font-primary);
     background-color: var(--bg-primary);
     color: var(--text-primary);
     transition: background-color 0.3s, color 0.3s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-secondary);
+    font-weight: 600;
 }
 
 /* Update existing components with variables */
@@ -56,4 +71,32 @@ input, textarea, select {
 
 .theme-toggle:hover {
     color: var(--accent-color);
+}
+
+:root[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f4f4f4;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --accent-color: #ff6b6b;
+    --accent-color-dark: #ff5252;
+    --border-color: #dddddd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --nav-bg: #333;
+    --nav-text: #fff;
+    --card-bg: #ffffff;
+}
+
+:root[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --accent-color: #ff6b6b;
+    --accent-color-dark: #ff5252;
+    --border-color: #404040;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --nav-bg: #000;
+    --nav-text: #fff;
+    --card-bg: #2d2d2d;
 }

@@ -1,3 +1,86 @@
 {
-  "recipes": []
+  "recipes": [
+    {
+      "id": "1741453662689",
+      "title": "Chicken Masala",
+      "description": "Chicken Tikka Masala is a beloved Indian-inspired dish known for its rich, creamy, and flavorful tomato-based curry. It features grilled or pan-seared marinated chicken pieces (tikka) simmered in a spiced, slightly tangy, and aromatic sauce. This dish perfectly balances smoky, spicy, and creamy elements and is often served with naan or basmati rice.",
+      "ingredients": [
+        "Ingredients:",
+        "500g boneless chicken (thighs or breast), cut into chunks",
+        "1/2 cup plain yogurt",
+        "1 tbsp lemon juice",
+        "1 tsp ginger paste",
+        "1 tsp garlic paste",
+        "1 tsp garam masala",
+        "1 tsp cumin powder",
+        "1 tsp coriander powder",
+        "1/2 tsp turmeric powder",
+        "1/2 tsp red chili powder (adjust to spice preference)",
+        "Salt to taste",
+        "1 tbsp oil",
+        "For the Masala Sauce:",
+        "2 tbsp butter or oil",
+        "1 large onion, finely chopped",
+        "2 tomatoes, pureed (or 1/2 cup canned tomato puree)",
+        "1 tsp ginger paste",
+        "1 tsp garlic paste",
+        "1 tsp cumin powder",
+        "1 tsp coriander powder",
+        "1 tsp paprika or Kashmiri red chili powder (for color)",
+        "1/2 tsp turmeric powder",
+        "1 tsp garam masala",
+        "1/2 cup heavy cream or fresh cream",
+        "1 tbsp kasuri methi (dried fenugreek leaves)",
+        "Fresh coriander leaves, chopped (for garnish)",
+        "Salt to taste",
+        "Optional:",
+        "Green chilies for extra spice",
+        "A pinch of sugar to balance acidity"
+      ],
+      "instructions": [
+        "Instructions:",
+        "Marinate the chicken by mixing yogurt, lemon juice, ginger paste, garlic paste, garam masala, cumin powder, coriander powder, turmeric powder, red chili powder, salt, and oil in a bowl.",
+        "Add the chicken chunks to the marinade, coat well, cover, and refrigerate for at least 1 hour.",
+        "Heat 1 tbsp oil in a pan and cook the marinated chicken on medium heat until browned and cooked through, then set it aside.",
+        "In the same pan, heat butter or oil and sauté the chopped onion until golden brown.",
+        "Add ginger paste and garlic paste, cooking for about 1 minute until fragrant.",
+        "Stir in the pureed tomatoes and cook for 5-7 minutes until the oil separates from the sauce.",
+        "Add cumin powder, coriander powder, paprika, turmeric powder, garam masala, and salt, and cook for another 2 minutes.",
+        "Add the cooked chicken and any juices to the sauce, stirring well to coat the chicken.",
+        "Pour in the cream and sprinkle kasuri methi, then simmer for 5 minutes until the sauce thickens.",
+        "Taste and adjust salt or spice if needed, adding a pinch of sugar if the sauce is too acidic.",
+        "Garnish with fresh coriander leaves and serve hot with naan or basmati rice."
+      ],
+      "prepTime": "110",
+      "dietaryType": "veg",
+      "image": "/uploads/1741453662686-502936963-chicken-tikka-masala.jpeg",
+      "author": "Ankit2106",
+      "authorId": "ankit@gmail.com",
+      "createdAt": "2025-03-08T17:07:42.689Z",
+      "ratings": [
+        {
+          "userId": "ankit@gmail.com",
+          "rating": 5,
+          "createdAt": "2025-03-08T17:08:15.337Z"
+        },
+        {
+          "userId": "ankit@gmail.com",
+          "rating": 3,
+          "createdAt": "2025-03-08T17:08:16.492Z"
+        },
+        {
+          "userId": "ankit@gmail.com",
+          "rating": 2,
+          "createdAt": "2025-03-08T17:08:16.908Z"
+        }
+      ],
+      "comments": [
+        {
+          "author": "Ankit2106",
+          "text": "Nice is a good recipe.",
+          "createdAt": "2025-03-08T17:08:50.877Z"
+        }
+      ]
+    }
+  ]
 }

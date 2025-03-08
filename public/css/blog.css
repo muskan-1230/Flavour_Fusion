@@ -817,4 +817,55 @@ body {
 
 .submit-btn:hover {
     background: var(--accent-color-dark);
+/* Update color values to use theme variables */
+.blog-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/blog-hero.jpg');
+    color: white;
+}
+
+.blog-container {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.blog-card {
+    background-color: var(--bg-secondary);
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.blog-card-content h2 {
+    color: var(--text-primary);
+}
+
+.blog-card-content p {
+    color: var(--text-secondary);
+}
+
+.category-btn {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.sidebar-widget {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.tag {
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+}
+
+.newsletter-widget input {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+.trending-posts article {
+    border-color: var(--border-color);
+}
+
+.post-info {
+    color: var(--text-secondary);
 }
