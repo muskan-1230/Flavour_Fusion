@@ -13,7 +13,6 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
-const blogRoutes = require('./routes/blogRoutes');
 
 // Middleware
 app.use(express.json());
