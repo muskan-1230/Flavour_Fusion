@@ -165,7 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h3 class="recipe-title">${recipe.title}</h3>
                         <div class="recipe-info">
                             <p><i class="far fa-clock"></i> ${recipe.prepTime} mins</p>
-                            <p><i class="fas fa-utensils"></i> ${recipe.category}</p>
+                            ${recipe.category && recipe.category !== 'undefined' ? `
+                                <p><i class="fas fa-utensils"></i> ${recipe.category}</p>` : ''}
                         </div>
                     </div>
                 </a>
@@ -193,4 +194,118 @@ document.addEventListener('DOMContentLoaded', () => {
     loadUserProfile();
     loadUserStats();
     loadUserRecipes(); // Load My Recipes tab by default
+
+    // Direct approach to profile image handling with fix for double upload prompt
+    (function() {
+        // Flag to track if we've already set up event handlers
+        let handlersInitialized = false;
+        
+        // Get elements
+        const avatarImage = document.getElementById('avatarImage');
+        const avatarContainer = document.getElementById('profileAvatar');
+        const fileInput = document.getElementById('avatarUpload');
+        
+        // Storage key
+        const STORAGE_KEY = 'profileImageBase64';
+        
+        // Function to load image
+        function loadImage() {
+            const imageData = localStorage.getItem(STORAGE_KEY);
+            if (imageData && avatarImage) {
+                avatarImage.setAttribute('src', imageData);
+                console.log('Image loaded from localStorage');
+            }
+        }
+        
+        // Function to save image
+        function saveImage(dataUrl) {
+            localStorage.setItem(STORAGE_KEY, dataUrl);
+            console.log('Image saved to localStorage');
+        }
+        
+        // Function to handle file selection
+        function handleFile(file) {
+            if (!file || !file.type.startsWith('image/')) {
+                alert('Please select a valid image file');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const dataUrl = e.target.result;
+                
+                // Update image
+                if (avatarImage) {
+                    avatarImage.setAttribute('src', dataUrl);
+                }
+                
+                // Save to localStorage
+                saveImage(dataUrl);
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        // Set up event handlers only once
+        function initializeHandlers() {
+            if (handlersInitialized) return;
+            
+            if (avatarContainer && fileInput) {
+                // Remove any existing handlers by cloning
+                const newFileInput = fileInput.cloneNode(true);
+                if (fileInput.parentNode) {
+                    fileInput.parentNode.replaceChild(newFileInput, fileInput);
+                }
+                
+                // Get fresh reference
+                const freshFileInput = document.getElementById('avatarUpload');
+                
+                if (freshFileInput) {
+                    // Set up click handler
+                    avatarContainer.onclick = function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        freshFileInput.click();
+                    };
+                    
+                    // Set up change handler
+                    freshFileInput.onchange = function(e) {
+                        if (e.target.files && e.target.files[0]) {
+                            handleFile(e.target.files[0]);
+                        }
+                    };
+                    
+                    handlersInitialized = true;
+                    console.log('Event handlers initialized');
+                }
+            }
+        }
+        
+        // Load image on script execution
+        loadImage();
+        
+        // Initialize handlers and load image on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadImage();
+            initializeHandlers();
+        });
+        
+        // Make functions available globally for debugging
+        window.profileImageFunctions = {
+            load: loadImage,
+            save: saveImage,
+            init: initializeHandlers
+        };
+    })();
+
+    // Register a service worker for caching
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/profile-sw.js')
+            .then(function(registration) {
+                console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch(function(error) {
+                console.error('Service Worker registration failed:', error);
+            });
+    }
 });

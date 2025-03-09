@@ -109,7 +109,7 @@
                     <li><a href="/blog">Blog</a></li>
                     <li><a href="/profile">Profile</a></li>
                     <li><a href="/about">About Us</a></li>
-                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="https://github.com/Kanav4002/Flavour_Fusion" target="_blank">GitHub Repository</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -123,6 +123,39 @@
             <p>&copy; <script>document.write(new Date().getFullYear())</script> FlavorFusion. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Add this at the end of your profile.html file, just before the closing </body> tag -->
+    <script>
+        // Immediate execution to ensure profile image loads
+        (function() {
+            // Try to load the profile image directly
+            const avatarImage = document.getElementById('avatarImage');
+            if (avatarImage) {
+                const imageData = localStorage.getItem('profileImageBase64');
+                if (imageData) {
+                    avatarImage.src = imageData;
+                    console.log('Profile image loaded via inline script');
+                }
+            }
+            
+            // Also set up a mutation observer to watch for changes to the avatar image
+            if (avatarImage) {
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+                            const newSrc = avatarImage.getAttribute('src');
+                            if (newSrc && !newSrc.includes('default')) {
+                                localStorage.setItem('profileImageBase64', newSrc);
+                                console.log('Profile image saved via mutation observer');
+                            }
+                        }
+                    });
+                });
+                
+                observer.observe(avatarImage, { attributes: true });
+            }
+        })();
+    </script>
 
     <script src="/js/profile.js"></script>
     <script src="/js/theme.js"></script>

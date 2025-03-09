@@ -211,3 +211,182 @@ body {
         height: 200px;
     }
 }
+
+/* Recipe card grid layout */
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+/* Recipe card styling */
+.recipe-card {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 100%;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Recipe card image */
+.recipe-card img {
+    width: 100%;
+    height: 200px; /* Fixed height for consistency */
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+/* Recipe card content */
+.recipe-card-content {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe-card h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+/* Recipe meta information */
+.recipe-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.recipe-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.recipe-meta i {
+    font-size: 0.9rem;
+}
+
+/* Added date styling */
+.added-date {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .recipe-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .recipe-card img {
+        height: 160px;
+    }
+}
+
+@media (max-width: 480px) {
+    .recipe-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+
+    .recipe-card img {
+        height: 140px;
+    }
+
+    .recipe-card h3 {
+        font-size: 1rem;
+    }
+}
+
+/* Target all links in recipe cards */
+.recipe-grid .recipe-card a,
+.recipe-grid .recipe-card a:link,
+.recipe-grid .recipe-card a:visited,
+.recipe-grid .recipe-card a:hover,
+.recipe-grid .recipe-card a:active {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+/* Specifically target the "By [username]" text */
+.recipe-card [href^="By"],
+.recipe-card [href^="By"]:visited {
+    color: white !important;
+}
+
+/* Target "Added to favorites" text */
+.recipe-card [href*="Added to favorites"],
+.recipe-card [href*="Added to favorites"]:visited {
+    color: #888 !important;
+}
+
+/* Additional specificity for any remaining purple links */
+.recipe-grid .recipe-card *[href],
+.recipe-grid .recipe-card *[href]:visited {
+    color: white !important;
+}
+
+/* Optional hover effect */
+.recipe-grid .recipe-card a:hover {
+    color: var(--accent-color) !important;
+}
+
+/* Target the recipe info paragraphs and their links */
+.recipe-info p,
+.recipe-info p a,
+.recipe-info p a:visited,
+.recipe-info p a:link,
+.recipe-info p a:active {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+/* Style for the "Added to favorites" text */
+.recipe-info p:last-child,
+.recipe-info p:last-child a,
+.recipe-info p:last-child a:visited {
+    color: #888 !important;
+    font-size: 0.9rem;
+}
+
+/* Optional hover effect */
+.recipe-info p a:hover {
+    color: var(--accent-color) !important;
+}
+
+/* Style for view recipe button */
+.view-recipe-btn,
+.view-recipe-btn:visited,
+.view-recipe-btn:link,
+.view-recipe-btn:active {
+    color: white !important;
+    text-decoration: none !important;
+    background-color: var(--accent-color);
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for the button */
+.view-recipe-btn:hover {
+    background-color: var(--accent-color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}

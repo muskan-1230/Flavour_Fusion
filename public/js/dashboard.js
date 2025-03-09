@@ -64,4 +64,91 @@ document.addEventListener('DOMContentLoaded', () => {
     // Call loadFavorites when page loads
     loadFavorites();
     loadRecipeOfDay();
+
+    // Function to update dashboard statistics
+    function updateDashboardStats() {
+        // Try different possible localStorage keys
+        let recipes = [];
+        let favorites = [];
+        
+        // Check all localStorage keys to find recipe data
+        const allKeys = Object.keys(localStorage);
+        
+        // Look for recipe data in various possible formats
+        for (const key of allKeys) {
+            try {
+                const data = JSON.parse(localStorage.getItem(key));
+                
+                if (Array.isArray(data)) {
+                    // Check if this looks like recipe data
+                    if (data.length > 0 && data[0] && 
+                        (data[0].title || data[0].name || data[0].recipe)) {
+                        recipes = data;
+                    }
+                    // Check if this looks like favorites data
+                    else if (data.length > 0 && 
+                            (typeof data[0] === 'number' || typeof data[0] === 'string')) {
+                        favorites = data;
+                    }
+                }
+            } catch (e) {
+                // Not JSON data, skip
+            }
+        }
+        
+        // If no favorites found, check for other possible keys
+        if (favorites.length === 0) {
+            const possibleFavKeys = ['favoriteRecipes', 'favorites', 'userFavorites', 'savedRecipes'];
+            for (const key of possibleFavKeys) {
+                try {
+                    const data = JSON.parse(localStorage.getItem(key));
+                    if (Array.isArray(data) && data.length > 0) {
+                        favorites = data;
+                        break;
+                    }
+                } catch (e) {
+                    // Not JSON data or doesn't exist
+                }
+            }
+        }
+        
+        // Calculate stats
+        const totalRecipes = recipes.length;
+        const totalFavorites = favorites.length;
+        
+        // Calculate average rating
+        let totalRating = 0;
+        let ratedRecipes = 0;
+        recipes.forEach(recipe => {
+            const rating = recipe.rating || recipe.stars || recipe.score;
+            if (rating) {
+                totalRating += parseFloat(rating);
+                ratedRecipes++;
+            }
+        });
+        const averageRating = ratedRecipes > 0 ? (totalRating / ratedRecipes).toFixed(1) : '0.0';
+        
+        // Calculate total views
+        const totalViews = recipes.reduce((sum, recipe) => {
+            const views = recipe.views || recipe.viewCount || 0;
+            return sum + views;
+        }, 0);
+        
+        // Update the DOM
+        document.getElementById('totalRecipes').textContent = totalRecipes;
+        document.getElementById('favoriteRecipes').textContent = totalFavorites;
+        document.getElementById('averageRating').textContent = averageRating;
+        document.getElementById('recipeViews').textContent = totalViews;
+    }
+
+    // Call the function when the page loads
+    updateDashboardStats();
+
+    // Update when localStorage changes
+    window.addEventListener('storage', (e) => {
+        updateDashboardStats();
+    });
+
+    // Also update periodically to catch any changes
+    setInterval(updateDashboardStats, 5000);
 });
