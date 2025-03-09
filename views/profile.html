@@ -40,8 +40,14 @@
     <main class="profile-container">
         <section class="profile-header">
             <div class="profile-info">
-                <div class="avatar">
-                    <i class="fas fa-user-circle"></i>
+                <div class="avatar-container">
+                    <div class="avatar" id="profileAvatar">
+                        <img src="/images/default-avatar.jpg" alt="Profile Picture" id="avatarImage">
+                        <div class="avatar-overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </div>
+                    <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
                 </div>
                 <div class="user-details">
                     <h1 id="username"></h1>

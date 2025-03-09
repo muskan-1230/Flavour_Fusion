@@ -1,4 +1,84 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const avatarElement = document.getElementById('profileAvatar');
+    const avatarUpload = document.getElementById('avatarUpload');
+    const avatarImage = document.getElementById('avatarImage');
+    const editProfileBtn = document.getElementById('editProfileBtn');
+
+    // Set up avatar upload functionality
+    if (avatarElement && avatarUpload) {
+        avatarElement.addEventListener('click', () => {
+            avatarUpload.click();
+        });
+
+        avatarUpload.addEventListener('change', async (event) => {
+            if (event.target.files && event.target.files[0]) {
+                const file = event.target.files[0];
+                
+                // Show preview immediately
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    avatarImage.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+                
+                // Show loading state
+                avatarElement.classList.add('loading');
+                
+                try {
+                    // Create FormData object to send the file
+                    const formData = new FormData();
+                    formData.append('avatar', file);
+                    
+                    // Upload the file to the server
+                    const response = await fetch('/api/user/avatar', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Failed to upload avatar');
+                    }
+                    
+                    const result = await response.json();
+                    
+                    // Update the avatar image with the new one from server
+                    avatarImage.src = result.avatarUrl + '?t=' + new Date().getTime(); // Add timestamp to prevent caching
+                    
+                    // Show success message
+                    showNotification('Profile picture updated successfully!', 'success');
+                } catch (error) {
+                    console.error('Error uploading avatar:', error);
+                    showNotification('Failed to upload profile picture. Please try again.', 'error');
+                } finally {
+                    // Remove loading state
+                    avatarElement.classList.remove('loading');
+                }
+            }
+        });
+    }
+
+    // Simple notification system
+    const showNotification = (message, type = 'info') => {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        // Show the notification
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 10);
+        
+        // Hide and remove after 3 seconds
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    };
+
     const loadUserProfile = async () => {
         try {
             const response = await fetch('/api/user/profile');
@@ -97,6 +177,17 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
     };
+
+    // Add Edit Profile button functionality
+    if (editProfileBtn) {
+        editProfileBtn.addEventListener('click', () => {
+            // You can either redirect to an edit profile page
+            window.location.href = '/edit-profile';
+            
+            // Or open a modal for editing (if you prefer inline editing)
+            // openEditProfileModal();
+        });
+    }
 
     // Initial load
     loadUserProfile();
