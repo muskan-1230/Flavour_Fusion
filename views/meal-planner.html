@@ -42,7 +42,33 @@
             <h1>Meal Planner</h1>
             <div class="week-navigation">
                 <button id="prevWeek"><i class="fas fa-chevron-left"></i></button>
-                <h2 id="weekDisplay"></h2>
+                <div class="date-picker">
+                    <span id="weekDisplay"></span>
+                    <button id="calendarToggle"><i class="fas fa-calendar-alt"></i></button>
+                    
+                    <!-- Calendar Popup -->
+                    <div id="calendarPopup" class="calendar-popup">
+                        <div class="calendar-header">
+                            <button id="prevMonthBtn"><i class="fas fa-chevron-left"></i></button>
+                            <div>
+                                <span id="monthYearDisplay"></span>
+                            </div>
+                            <button id="nextMonthBtn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="weekdays">
+                            <div>Su</div>
+                            <div>Mo</div>
+                            <div>Tu</div>
+                            <div>We</div>
+                            <div>Th</div>
+                            <div>Fr</div>
+                            <div>Sa</div>
+                        </div>
+                        <div class="calendar-days" id="calendarDays">
+                            <!-- Days will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
                 <button id="nextWeek"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>

@@ -1,7 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
+    let currentDate = new Date();
     let currentWeek = new Date();
     let selectedSlot = null;
     let mealPlan = {};
+
+    // Calendar elements
+    const calendarToggle = document.getElementById('calendarToggle');
+    const calendarPopup = document.getElementById('calendarPopup');
+    const monthYearDisplay = document.getElementById('monthYearDisplay');
+    const prevMonthBtn = document.getElementById('prevMonthBtn');
+    const nextMonthBtn = document.getElementById('nextMonthBtn');
+    const calendarDays = document.getElementById('calendarDays');
 
     // Initialize the meal planner
     const initializePlanner = () => {
@@ -9,6 +18,111 @@ document.addEventListener('DOMContentLoaded', () => {
         createMealGrid();
         loadRecipes();
         loadMealPlan();
+        initializeCalendar();
+    };
+
+    // Calendar functionality
+    const initializeCalendar = () => {
+        updateCalendarMonth();
+        
+        // Event listeners for calendar
+        calendarToggle.addEventListener('click', () => {
+            calendarPopup.classList.toggle('active');
+        });
+        
+        prevMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            updateCalendarMonth();
+        });
+        
+        nextMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            updateCalendarMonth();
+        });
+        
+        // Close calendar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.date-picker') && calendarPopup.classList.contains('active')) {
+                calendarPopup.classList.remove('active');
+            }
+        });
+    };
+    
+    const updateCalendarMonth = () => {
+        // Update month/year display
+        const monthYear = currentDate.toLocaleDateString('en-US', { 
+            month: 'long', 
+            year: 'numeric' 
+        });
+        monthYearDisplay.textContent = monthYear;
+        
+        // Generate calendar days
+        const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+        const daysInMonth = lastDay.getDate();
+        const startDay = firstDay.getDay(); // 0 = Sunday
+        
+        // Clear previous days
+        calendarDays.innerHTML = '';
+        
+        // Previous month days
+        const prevMonthDays = startDay;
+        const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+        const prevMonthLastDay = prevMonth.getDate();
+        
+        for (let i = prevMonthDays - 1; i >= 0; i--) {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'calendar-day other-month';
+            dayElement.textContent = prevMonthLastDay - i;
+            calendarDays.appendChild(dayElement);
+        }
+        
+        // Current month days
+        const today = new Date();
+        for (let i = 1; i <= daysInMonth; i++) {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'calendar-day';
+            dayElement.textContent = i;
+            
+            // Check if this day is today
+            if (currentDate.getFullYear() === today.getFullYear() && 
+                currentDate.getMonth() === today.getMonth() && 
+                i === today.getDate()) {
+                dayElement.classList.add('today');
+            }
+            
+            // Check if this day is in the selected week
+            const dayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
+            const startOfSelectedWeek = getStartOfWeek(currentWeek);
+            const endOfSelectedWeek = new Date(startOfSelectedWeek);
+            endOfSelectedWeek.setDate(endOfSelectedWeek.getDate() + 6);
+            
+            if (dayDate >= startOfSelectedWeek && dayDate <= endOfSelectedWeek) {
+                dayElement.classList.add('selected');
+            }
+            
+            // Add click event
+            dayElement.addEventListener('click', () => {
+                // Set current week to the week containing this day
+                currentWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
+                updateWeekDisplay();
+                loadMealPlan();
+                calendarPopup.classList.remove('active');
+            });
+            
+            calendarDays.appendChild(dayElement);
+        }
+        
+        // Next month days
+        const totalDaysDisplayed = prevMonthDays + daysInMonth;
+        const nextMonthDays = 42 - totalDaysDisplayed; // 6 rows of 7 days
+        
+        for (let i = 1; i <= nextMonthDays; i++) {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'calendar-day other-month';
+            dayElement.textContent = i;
+            calendarDays.appendChild(dayElement);
+        }
     };
 
     // Update week display
@@ -50,6 +164,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.meal-slot').forEach(slot => {
             slot.addEventListener('click', () => selectMealSlot(slot));
         });
+    };
+
+    // Helper function to get start of week
+    const getStartOfWeek = (date) => {
+        const d = new Date(date);
+        const day = d.getDay();
+        d.setDate(d.getDate() - day);
+        return d;
     };
 
     // Load recipes for selection
@@ -169,6 +291,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Update meal plan UI
+    const updateMealPlanUI = () => {
+        // Clear all meal slots
+        document.querySelectorAll('.meal-slot').forEach(slot => {
+            slot.querySelector('.meal-content').innerHTML = '';
+            slot.classList.remove('filled');
+        });
+        
+        // Fill in the meal plan
+        Object.entries(mealPlan).forEach(([day, meals]) => {
+            Object.entries(meals).forEach(([mealType, recipe]) => {
+                const slot = document.querySelector(`.meal-slot[data-day="${day}"][data-meal="${mealType}"]`);
+                if (slot) {
+                    slot.querySelector('.meal-content').innerHTML = `
+                        <div class="planned-meal">
+                            <h5>${recipe.title}</h5>
+                            <button class="remove-meal" onclick="removeMeal('${day}', '${mealType}')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                    slot.classList.add('filled');
+                }
+            });
+        });
+        
+        updateShoppingList();
+    };
+
     // Update shopping list
     const updateShoppingList = () => {
         const ingredients = new Map();
@@ -202,12 +353,14 @@ document.addEventListener('DOMContentLoaded', () => {
         currentWeek.setDate(currentWeek.getDate() - 7);
         updateWeekDisplay();
         loadMealPlan();
+        updateCalendarMonth(); // Update calendar to show selected week
     });
 
     document.getElementById('nextWeek').addEventListener('click', () => {
         currentWeek.setDate(currentWeek.getDate() + 7);
         updateWeekDisplay();
         loadMealPlan();
+        updateCalendarMonth(); // Update calendar to show selected week
     });
 
     // Recipe search
@@ -235,14 +388,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     });
-
-    // Helper function to get start of week
-    const getStartOfWeek = (date) => {
-        const d = new Date(date);
-        const day = d.getDay();
-        d.setDate(d.getDate() - day);
-        return d;
-    };
 
     // Initialize the planner
     initializePlanner();
