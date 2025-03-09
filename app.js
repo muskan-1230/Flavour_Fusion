@@ -13,6 +13,8 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Middleware
 app.use(express.json());
@@ -42,6 +44,10 @@ app.get('/login', (req, res) => {
 
 app.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'signup.html'));
+});
+
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'about.html'));
 });
 
 app.post('/api/login', (req, res) => {

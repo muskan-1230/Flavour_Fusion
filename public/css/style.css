@@ -34,7 +34,7 @@ nav {
 
 /* Logo styling as a link */
 .logo {
-    font-size: 1.8rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--nav-text);
     text-decoration: none;

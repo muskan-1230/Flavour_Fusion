@@ -1,5 +1,12 @@
-// Blog post data (in a real application, this would come from a database)
-const blogPosts = [
+// Initialize blog posts array
+let blogPosts = [];
+let currentPostId = null;
+
+// Global variable to store the selected image
+let selectedImageDataUrl = null;
+
+// Sample data for initial blog posts (only used if localStorage is empty)
+const sampleBlogPosts = [
     {
         id: 1,
         title: "10 Essential Knife Skills Every Home Cook Should Master",
@@ -8,51 +15,11 @@ const blogPosts = [
         category: "cooking-tips",
         tags: ["Cooking Tips", "Techniques"],
         image: "https://source.unsplash.com/random/600x400?cooking",
-        content: `<p>Having proper knife skills is one of the most fundamental aspects of cooking. Not only does it make your food look better, but it also ensures even cooking and can significantly speed up your meal preparation.</p>
-        
-        <h3>1. The Proper Grip</h3>
-        <p>Before you start cutting, it's essential to hold your knife correctly. Pinch the blade between your thumb and forefinger at the point where the blade meets the handle, then wrap your remaining fingers around the handle. This grip gives you the most control over the knife.</p>
-        
-        <h3>2. The Claw Technique</h3>
-        <p>To keep your fingers safe, use the "claw" technique when holding the food you're cutting. Curl your fingertips under and use your knuckles as a guide for the knife. This way, even if the knife slips, it will hit your knuckles rather than your fingertips.</p>
-        
-        <h3>3. Dicing an Onion</h3>
-        <p>Dicing an onion efficiently is a skill that will save you time and tears. Start by cutting the onion in half through the root end. Peel off the skin, then make horizontal cuts parallel to the cutting board, followed by vertical cuts from top to bottom. Finally, slice across these cuts to create perfect dice.</p>
-        
-        <h3>4. Julienne Cuts</h3>
-        <p>Julienne cuts create thin, matchstick-sized pieces that cook quickly and look elegant. To julienne a vegetable, first cut it into thin slices, then stack those slices and cut them into thin strips.</p>
-        
-        <h3>5. Chiffonade</h3>
-        <p>Chiffonade is a technique used for leafy herbs and vegetables. Stack the leaves, roll them tightly, then slice thinly to create delicate ribbons. This is perfect for basil, mint, or spinach.</p>
-        
-        <h3>6. Mincing Garlic</h3>
-        <p>To mince garlic efficiently, first crush the clove with the flat side of your knife to remove the skin. Then, finely chop the garlic. For an even finer mince, sprinkle a little salt on the chopped garlic and use the side of your knife to crush and drag it across the cutting board.</p>
-        
-        <h3>7. Butterflying</h3>
-        <p>Butterflying is a technique used to create a uniform thickness in meat or poultry. Make a horizontal cut through the center of the meat, stopping just before cutting all the way through, then open it like a book. This is particularly useful for chicken breasts or pork tenderloin.</p>
-        
-        <h3>8. Carving</h3>
-        <p>Properly carving a roast or poultry ensures that each slice is tender and visually appealing. Always carve against the grain of the meat, using long, smooth strokes with a sharp knife.</p>
-        
-        <h3>9. Supreming Citrus</h3>
-        <p>Supreming is a technique for removing the segments of citrus fruits without any pith or membrane. Cut off the top and bottom of the fruit, then remove the peel and pith by following the curve of the fruit. Finally, cut between the membranes to release the segments.</p>
-        
-        <h3>10. Keeping Your Knives Sharp</h3>
-        <p>A sharp knife is safer and more efficient than a dull one. Learn to use a honing steel to maintain your knife's edge between sharpenings, and invest in a good quality knife sharpener or have your knives professionally sharpened regularly.</p>
-        
-        <p>Mastering these knife skills will not only make you more efficient in the kitchen but will also elevate the presentation and quality of your dishes. Practice regularly, and soon these techniques will become second nature.</p>`,
+        content: "Learn the fundamental cutting techniques that will transform your cooking experience and help you prepare meals like a professional chef...",
         likes: 42,
         comments: [
-            {
-                author: "John Smith",
-                date: "June 16, 2023",
-                content: "This article was incredibly helpful! I've always struggled with dicing onions efficiently, but the technique described here made a huge difference."
-            },
-            {
-                author: "Lisa Johnson",
-                date: "June 17, 2023",
-                content: "I never knew about the claw technique before. It's already saved me from a few close calls in the kitchen. Thanks for sharing these tips!"
-            }
+            { author: "John Doe", date: "June 16, 2023", content: "Great tips! I've been trying to improve my knife skills." },
+            { author: "Jane Smith", date: "June 17, 2023", content: "The julienne technique changed my salad game completely!" }
         ]
     },
     {
@@ -63,52 +30,10 @@ const blogPosts = [
         category: "ingredients",
         tags: ["Ingredients", "Spices"],
         image: "https://source.unsplash.com/random/600x400?spices",
-        content: `<p>Spice blends are the secret weapon of many great cooks. By creating your own signature spice mixes, you can instantly add complex, balanced flavors to any dish with just a sprinkle.</p>
-        
-        <h3>Understanding Flavor Profiles</h3>
-        <p>Before you start blending spices, it's important to understand the basic flavor categories: sweet, salty, sour, bitter, and umami. A well-balanced spice blend often incorporates several of these elements.</p>
-        
-        <h3>Essential Spices for Your Pantry</h3>
-        <p>Start with these foundational spices: black peppercorns, cumin seeds, coriander seeds, cinnamon sticks, cardamom pods, cloves, mustard seeds, paprika, turmeric, and dried chilies. Having both whole and ground versions gives you maximum flexibility.</p>
-        
-        <h3>Tools of the Trade</h3>
-        <p>Invest in a good spice grinder or mortar and pestle. Freshly ground spices have significantly more flavor than pre-ground ones. A set of airtight containers is also essential for storing your creations.</p>
-        
-        <h3>The Art of Toasting</h3>
-        <p>Toasting whole spices before grinding them awakens their essential oils and deepens their flavor. Use a dry skillet over medium heat, shaking frequently, until the spices become fragrant—usually just 1-2 minutes.</p>
-        
-        <h3>Classic Spice Blend Recipes to Master</h3>
-        <p>Start by learning these fundamental blends:</p>
-        <ul>
-            <li><strong>Garam Masala:</strong> A warming Indian blend featuring cinnamon, cardamom, cloves, cumin, and coriander</li>
-            <li><strong>Za'atar:</strong> A Middle Eastern mix of dried thyme, sumac, sesame seeds, and salt</li>
-            <li><strong>Five-Spice Powder:</strong> A Chinese blend of star anise, cloves, cinnamon, Sichuan peppercorns, and fennel seeds</li>
-            <li><strong>Herbes de Provence:</strong> A French herb mixture including thyme, basil, rosemary, tarragon, and lavender</li>
-        </ul>
-        
-        <h3>Creating Your Signature Blend</h3>
-        <p>Once you understand the classics, start experimenting. Begin with a dominant flavor, then add complementary spices in smaller amounts. Keep notes on your recipes so you can replicate successful blends.</p>
-        
-        <h3>Balancing Act</h3>
-        <p>Remember that some spices are more potent than others. Start with small amounts of strong spices like cloves, star anise, and cayenne, then adjust to taste.</p>
-        
-        <h3>Storage and Shelf Life</h3>
-        <p>Store your spice blends in airtight containers away from heat, light, and moisture. Most blends will stay fresh for about 3-6 months before losing potency.</p>
-        
-        <h3>Pairing Spice Blends with Foods</h3>
-        <p>Different blends work better with certain ingredients. Warm, sweet spices like cinnamon and nutmeg pair well with root vegetables and fruits. Earthy spices like cumin and coriander complement legumes and meats.</p>
-        
-        <p>Creating your own spice blends is a journey of discovery that will transform your cooking. Start with small batches, taste frequently, and don't be afraid to adjust and experiment until you find combinations that delight your palate.</p>`,
+        content: "Discover how to combine spices to create unique flavor profiles that will elevate your dishes and impress your guests with bold, balanced tastes...",
         likes: 38,
-        comments: [
-            {
-                author: "Maria Garcia",
-                date: "June 11, 2023",
-                content: "I made the garam masala blend following your proportions and it was so much better than store-bought! Can't wait to try making za'atar next."
-            }
-        ]
+        comments: []
     }
-    // Additional blog posts would be added here
 ];
 
 // DOM Elements
@@ -116,19 +41,469 @@ const newPostModal = document.getElementById('newPostModal');
 const editPostModal = document.getElementById('editPostModal');
 const deleteConfirmModal = document.getElementById('deleteConfirmModal');
 const viewPostModal = document.getElementById('viewPostModal');
-let currentPostId = null;
 
-// Open the new post modal
-function openNewPostModal() {
-    newPostModal.style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+// Load blog posts from localStorage on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Get DOM elements
+    const newPostModal = document.getElementById('newPostModal');
+    const editPostModal = document.getElementById('editPostModal');
+    const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+    const viewPostModal = document.getElementById('viewPostModal');
+    
+    // Load saved posts from localStorage
+    loadBlogPostsFromStorage();
+    
+    // Initialize blog posts display
+    refreshBlogPosts();
+    
+    // Add event listeners
+    setupEventListeners();
+
+    // Set up search functionality
+    const searchForm = document.getElementById('blogSearchForm');
+    const searchInput = document.getElementById('blogSearchInput');
+    
+    if (searchForm && searchInput) {
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            
+            if (searchTerm) {
+                searchBlogPosts(searchTerm);
+            } else {
+                // If search is empty, show all posts
+                refreshBlogPosts();
+            }
+        });
+        
+        // Add real-time search as user types (optional)
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            
+            // Only search if we have at least 3 characters
+            if (searchTerm.length >= 3) {
+                searchBlogPosts(searchTerm);
+            } else if (searchTerm.length === 0) {
+                // If search is cleared, show all posts
+                refreshBlogPosts();
+            }
+        });
+    }
+});
+
+// Function to set up all event listeners
+function setupEventListeners() {
+    // New post button
+    const newPostBtn = document.getElementById('newPostBtn');
+    if (newPostBtn) {
+        newPostBtn.addEventListener('click', openNewPostModal);
+    }
+    
+    // New post form submission
+    const newPostForm = document.getElementById('newPostForm');
+    if (newPostForm) {
+        newPostForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            publishPost();
+        });
+    }
+    
+    // Delete confirmation
+    const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
+    if (deleteConfirmBtn) {
+        deleteConfirmBtn.addEventListener('click', function() {
+            deletePost(currentPostId);
+            closeDeleteConfirmModal();
+        });
+    }
+    
+    // Comment form submission
+    const commentForm = document.getElementById('commentForm');
+    if (commentForm) {
+        commentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            addComment();
+        });
+    }
+    
+    // Modal close buttons
+    document.querySelectorAll('.modal-close').forEach(button => {
+        button.addEventListener('click', function() {
+            closeAllModals();
+        });
+    });
+    
+    // Close modals when clicking outside
+    window.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal')) {
+            closeAllModals();
+        }
+    });
 }
 
-// Close the new post modal
+// Function to load blog posts from localStorage
+function loadBlogPostsFromStorage() {
+    const savedPosts = localStorage.getItem('blogPosts');
+    if (savedPosts) {
+        try {
+            blogPosts = JSON.parse(savedPosts);
+            console.log('Loaded', blogPosts.length, 'posts from localStorage');
+        } catch (error) {
+            console.error('Error loading posts from localStorage:', error);
+            blogPosts = [];
+        }
+    } else {
+        blogPosts = [];
+    }
+}
+
+// Function to save blog posts to localStorage
+function saveBlogPostsToStorage() {
+    try {
+        localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+        console.log('Saved', blogPosts.length, 'posts to localStorage');
+    } catch (error) {
+        console.error('Error saving posts to localStorage:', error);
+    }
+}
+
+// Open new post modal
+function openNewPostModal() {
+    // Reset form fields
+    document.getElementById('postTitle').value = '';
+    document.getElementById('postCategory').value = 'recipes';
+    document.getElementById('postTags').value = '';
+    document.getElementById('postContent').value = '';
+    
+    // Reset image preview if it exists
+    const imagePreview = document.getElementById('imagePreview');
+    if (imagePreview) {
+        imagePreview.innerHTML = '';
+        imagePreview.style.display = 'none';
+    }
+    
+    // Reset file input
+    const imageInput = document.getElementById('postImage');
+    if (imageInput) {
+        imageInput.value = '';
+    }
+    
+    // Reset selected image data URL
+    selectedImageDataUrl = null;
+    
+    // Show the modal
+    const modal = document.getElementById('newPostModal');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+}
+
+// Close new post modal
 function closeNewPostModal() {
-    newPostModal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Re-enable scrolling
-    document.getElementById('newPostForm').reset();
+    const modal = document.getElementById('newPostModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
+}
+
+// Close all modals
+function closeAllModals() {
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.style.display = 'none';
+    });
+    document.body.style.overflow = 'auto';
+}
+
+// Publish a new post
+function publishPost() {
+    // Get form values
+    const title = document.getElementById('postTitle').value;
+    const category = document.getElementById('postCategory').value;
+    const tags = document.getElementById('postTags').value.split(',').map(tag => tag.trim()).filter(tag => tag);
+    const imageInput = document.getElementById('postImage');
+    const content = document.getElementById('postContent').value;
+    
+    // Validate required fields
+    if (!title || !content) {
+        alert('Title and content are required!');
+        return;
+    }
+    
+    // Handle the image file
+    let imageUrl = 'https://picsum.photos/800/500'; // Default fallback
+    
+    // If a file is selected, create a data URL from it
+    if (imageInput && imageInput.files && imageInput.files[0]) {
+        const reader = new FileReader();
+        
+        // This is an async operation, so we need to handle it with a promise
+        const imagePromise = new Promise((resolve) => {
+            reader.onload = function(e) {
+                resolve(e.target.result); // This is the data URL
+            };
+            reader.readAsDataURL(imageInput.files[0]);
+        });
+        
+        // Wait for the image to be processed, then continue
+        imagePromise.then((dataUrl) => {
+            // Create new post object with the actual image
+            createAndSavePost(title, category, tags, content, dataUrl);
+        });
+        
+        return; // Exit early as we're handling this asynchronously
+    }
+    
+    // If no image was selected, use the default and continue
+    createAndSavePost(title, category, tags, content, imageUrl);
+}
+
+// Helper function to create and save a post
+function createAndSavePost(title, category, tags, content, imageUrl) {
+    // Create new post object
+    const newPost = {
+        id: Date.now(), // Use timestamp for unique ID
+        title: title,
+        author: "Current User",
+        date: new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'}),
+        category: category,
+        tags: tags,
+        image: imageUrl,
+        content: content,
+        likes: 0,
+        comments: []
+    };
+    
+    // Add to blog posts array
+    blogPosts.push(newPost);
+    
+    // Save to localStorage
+    saveBlogPostsToStorage();
+    
+    // Update the UI
+    refreshBlogPosts();
+    
+    // Close the modal
+    closeNewPostModal();
+    
+    // Show success message
+    alert('Blog post published successfully!');
+}
+
+// Delete a post
+function deletePost(postId) {
+    const index = blogPosts.findIndex(p => p.id === postId);
+    if (index !== -1) {
+        blogPosts.splice(index, 1);
+        saveBlogPostsToStorage();
+        refreshBlogPosts();
+    }
+}
+
+// Confirm delete post
+function confirmDeletePost(postId) {
+    currentPostId = postId;
+    document.getElementById('deleteConfirmModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+// Close delete confirmation modal
+function closeDeleteConfirmModal() {
+    document.getElementById('deleteConfirmModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Open view post modal
+function openViewPostModal(postId) {
+    const post = blogPosts.find(p => p.id === postId);
+    if (!post) return;
+    
+    currentPostId = postId;
+    
+    // Set post content
+    document.getElementById('viewPostTitle').textContent = post.title;
+    document.getElementById('viewPostAuthor').textContent = `By ${post.author}`;
+    document.getElementById('viewPostDate').textContent = post.date;
+    
+    // Set tags
+    const tagsContainer = document.getElementById('viewPostTags');
+    tagsContainer.innerHTML = '';
+    post.tags.forEach(tag => {
+        const tagSpan = document.createElement('span');
+        tagSpan.className = 'blog-tag';
+        tagSpan.textContent = '#' + tag;
+        tagsContainer.appendChild(tagSpan);
+    });
+    
+    // Set image with fallback
+    const imageElement = document.getElementById('viewPostImage');
+    if (imageElement) {
+        imageElement.src = post.image;
+        imageElement.alt = post.title;
+        imageElement.onerror = function() {
+            this.onerror = null;
+            this.src = 'https://picsum.photos/800/500';
+        };
+    }
+    
+    // Set content
+    document.getElementById('viewPostContent').textContent = post.content;
+    
+    // Load comments
+    loadComments(post);
+    
+    // Show modal
+    document.getElementById('viewPostModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+// Load comments for a post
+function loadComments(post) {
+    const commentsContainer = document.getElementById('commentsContainer');
+    commentsContainer.innerHTML = '';
+    
+    if (post.comments && post.comments.length > 0) {
+        post.comments.forEach(comment => {
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'comment';
+            
+            commentDiv.innerHTML = `
+                <div class="comment-header">
+                    <span class="comment-author">${comment.author}</span>
+                    <span class="comment-date">${comment.date}</span>
+                </div>
+                <div class="comment-content">
+                    <p>${comment.content}</p>
+                </div>
+            `;
+            
+            commentsContainer.appendChild(commentDiv);
+        });
+    } else {
+        commentsContainer.innerHTML = '<p>No comments yet. Be the first to comment!</p>';
+    }
+}
+
+// Add a comment to a post
+function addComment() {
+    const commentContent = document.getElementById('commentContent').value;
+    if (!commentContent.trim()) {
+        alert('Comment cannot be empty!');
+        return;
+    }
+    
+    const post = blogPosts.find(p => p.id === currentPostId);
+    if (!post) return;
+    
+    // Create new comment
+    const newComment = {
+        author: "Current User",
+        date: new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'}),
+        content: commentContent
+    };
+    
+    // Add comment to post
+    post.comments.push(newComment);
+    
+    // Save to localStorage
+    saveBlogPostsToStorage();
+    
+    // Reload comments
+    loadComments(post);
+    
+    // Clear comment form
+    document.getElementById('commentContent').value = '';
+    
+    // Update blog posts display to show updated comment count
+    refreshBlogPosts();
+}
+
+// Refresh blog posts display
+function refreshBlogPosts() {
+    const blogPostsContainer = document.querySelector('.blog-posts');
+    if (!blogPostsContainer) return;
+    
+    // Remove any existing search header
+    const existingHeader = document.querySelector('.search-results-header');
+    if (existingHeader) {
+        existingHeader.remove();
+    }
+    
+    blogPostsContainer.innerHTML = '';
+    
+    if (blogPosts.length === 0) {
+        blogPostsContainer.innerHTML = '<p>No blog posts yet. Be the first to create one!</p>';
+        return;
+    }
+    
+    // Sort posts by date (newest first)
+    const sortedPosts = [...blogPosts].sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+    });
+    
+    // Add each post to the container
+    sortedPosts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = 'blog-card';
+        
+        // Create excerpt
+        const excerpt = post.content.length > 150 
+            ? post.content.substring(0, 150) + '...' 
+            : post.content;
+        
+        // Format tags as hashtags
+        const tagHtml = post.tags.map(tag => `<span class="blog-tag">#${tag}</span>`).join(' ');
+        
+        // Use a fallback image in case the main one fails
+        const fallbackImage = 'https://picsum.photos/800/500';
+        
+        postElement.innerHTML = `
+            <div class="blog-card-img">
+                <img src="${post.image}" alt="${post.title}" onerror="this.onerror=null; this.src='${fallbackImage}';">
+            </div>
+            <div class="blog-card-content">
+                <div class="blog-card-meta">
+                    <span>By ${post.author}</span>
+                    <span>${post.date}</span>
+                </div>
+                <div class="blog-card-tags">
+                    ${tagHtml}
+                </div>
+                <h3>${post.title}</h3>
+                <p>${excerpt}</p>
+                <div class="blog-card-actions">
+                    <button class="blog-card-btn" onclick="openViewPostModal(${post.id})">Read More</button>
+                    <button class="blog-card-btn secondary" onclick="openEditModal(${post.id})">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="blog-card-btn delete" onclick="confirmDeletePost(${post.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="blog-card-stats">
+                    <span class="like-btn" onclick="toggleLike(${post.id})">
+                        <i class="far fa-heart"></i> ${post.likes}
+                    </span>
+                    <span>
+                        <i class="far fa-comment"></i> ${post.comments.length}
+                    </span>
+                </div>
+            </div>
+        `;
+        
+        blogPostsContainer.appendChild(postElement);
+    });
+}
+
+// Toggle like on a post
+function toggleLike(postId) {
+    const post = blogPosts.find(p => p.id === postId);
+    if (!post) return;
+    
+    post.likes += 1;
+    saveBlogPostsToStorage();
+    refreshBlogPosts();
 }
 
 // Open the edit post modal
@@ -139,7 +514,7 @@ function openEditModal(postId) {
     if (post) {
         document.getElementById('editPostId').value = post.id;
         document.getElementById('editPostTitle').value = post.title;
-        document.getElementById('editPostCategory').value = post.category;
+        document.getElementById('editPostCategory').value = post.category || '';
         document.getElementById('editPostTags').value = post.tags.join(', ');
         document.getElementById('editPostContent').value = post.content;
         document.getElementById('currentImage').src = post.image;
@@ -158,170 +533,6 @@ function closeEditModal() {
     currentPostId = null;
 }
 
-// Open delete confirmation modal
-function confirmDeletePost() {
-    closeEditModal();
-    deleteConfirmModal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-
-// Close delete confirmation modal
-function closeDeleteConfirmModal() {
-    deleteConfirmModal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Delete post
-function deletePost() {
-    // In a real application, you would send a request to your server to delete the post
-    alert(`Post with ID ${currentPostId} would be deleted`);
-    closeDeleteConfirmModal();
-    // After successful deletion, you would typically refresh the page or update the UI
-}
-
-// Open view post modal
-function openViewPostModal(postId) {
-    const post = blogPosts.find(p => p.id === postId);
-    
-    if (post) {
-        document.getElementById('viewPostTitle').textContent = post.title;
-        document.getElementById('viewPostAuthor').textContent = `By ${post.author}`;
-        document.getElementById('viewPostDate').textContent = post.date;
-        
-        // Clear and populate tags
-        const tagsContainer = document.getElementById('viewPostTags');
-        tagsContainer.innerHTML = '';
-        post.tags.forEach(tag => {
-            const tagSpan = document.createElement('span');
-            tagSpan.className = 'blog-tag';
-            tagSpan.textContent = tag;
-            tagsContainer.appendChild(tagSpan);
-        });
-        
-        // Set image
-        const imageElement = document.querySelector('#viewPostImage img');
-        imageElement.src = post.image;
-        
-        // Set content
-        document.getElementById('viewPostContent').innerHTML = post.content;
-        
-        // Clear and populate comments
-        const commentsContainer = document.getElementById('commentsContainer');
-        commentsContainer.innerHTML = '';
-        
-        if (post.comments && post.comments.length > 0) {
-            post.comments.forEach(comment => {
-                const commentDiv = document.createElement('div');
-                commentDiv.className = 'comment';
-                commentDiv.style.padding = '1rem 0';
-                commentDiv.style.borderBottom = '1px solid var(--border-color-light)';
-                
-                const commentHeader = document.createElement('div');
-                commentHeader.style.display = 'flex';
-                commentHeader.style.justifyContent = 'space-between';
-                commentHeader.style.marginBottom = '0.5rem';
-                
-                const authorSpan = document.createElement('span');
-                authorSpan.style.fontWeight = 'bold';
-                authorSpan.textContent = comment.author;
-                
-                const dateSpan = document.createElement('span');
-                dateSpan.style.color = 'var(--text-secondary)';
-                dateSpan.style.fontSize = '0.9rem';
-                dateSpan.textContent = comment.date;
-                
-                commentHeader.appendChild(authorSpan);
-                commentHeader.appendChild(dateSpan);
-                
-                const commentContent = document.createElement('p');
-                commentContent.textContent = comment.content;
-                
-                commentDiv.appendChild(commentHeader);
-                commentDiv.appendChild(commentContent);
-                commentsContainer.appendChild(commentDiv);
-            });
-        } else {
-            commentsContainer.innerHTML = '<p>No comments yet. Be the first to comment!</p>';
-        }
-        
-        viewPostModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-// Close view post modal
-function closeViewPostModal() {
-    viewPostModal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Event Listeners
-document.addEventListener('DOMContentLoaded', function() {
-    // Close modals when clicking outside the content
-    window.addEventListener('click', function(event) {
-        if (event.target === newPostModal) {
-            closeNewPostModal();
-        } else if (event.target === editPostModal) {
-            closeEditModal();
-        } else if (event.target === deleteConfirmModal) {
-            closeDeleteConfirmModal();
-        } else if (event.target === viewPostModal) {
-            closeViewPostModal();
-        }
-    });
-    
-    // Form submissions
-    document.getElementById('newPostForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        // In a real application, you would send the form data to your server
-        alert('New post would be created');
-        closeNewPostModal();
-    });
-    
-    document.getElementById('editPostForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        // In a real application, you would send the form data to your server
-        alert(`Post with ID ${currentPostId} would be updated`);
-        closeEditModal();
-    });
-    
-    document.getElementById('commentForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const commentContent = document.getElementById('commentContent').value;
-        if (commentContent.trim() !== '') {
-            alert('Comment would be added');
-            document.getElementById('commentContent').value = '';
-        }
-    });
-    
-    // Add click event listeners to "Read More" buttons
-    const readMoreButtons = document.querySelectorAll('.blog-card-btn:not(.secondary)');
-    readMoreButtons.forEach((button, index) => {
-        button.addEventListener('click', function() {
-            openViewPostModal(index + 1); // Assuming IDs start from 1
-        });
-    });
-    
-    // Like functionality
-    const likeElements = document.querySelectorAll('.blog-card-stats span:first-child');
-    likeElements.forEach(element => {
-        element.addEventListener('click', function() {
-            const icon = this.querySelector('i');
-            if (icon.classList.contains('far')) {
-                icon.classList.remove('far');
-                icon.classList.add('fas');
-                const count = parseInt(this.textContent.match(/\d+/)[0]) + 1;
-                this.innerHTML = `<i class="fas fa-heart"></i> ${count}`;
-            } else {
-                icon.classList.remove('fas');
-                icon.classList.add('far');
-                const count = parseInt(this.textContent.match(/\d+/)[0]) - 1;
-                this.innerHTML = `<i class="far fa-heart"></i> ${count}`;
-            }
-        });
-    });
-});
-
 // Search functionality
 document.querySelector('.blog-search button').addEventListener('click', function() {
     const searchTerm = document.querySelector('.blog-search input').value.toLowerCase();
@@ -337,3 +548,146 @@ document.querySelector('.blog-search input').addEventListener('keypress', functi
         document.querySelector('.blog-search button').click();
     }
 });
+
+// Add search functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Set up search functionality
+    const searchForm = document.getElementById('blogSearchForm');
+    const searchInput = document.getElementById('blogSearchInput');
+    
+    if (searchForm && searchInput) {
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            
+            if (searchTerm) {
+                searchBlogPosts(searchTerm);
+            } else {
+                // If search is empty, show all posts
+                refreshBlogPosts();
+            }
+        });
+        
+        // Add real-time search as user types (optional)
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            
+            // Only search if we have at least 3 characters
+            if (searchTerm.length >= 3) {
+                searchBlogPosts(searchTerm);
+            } else if (searchTerm.length === 0) {
+                // If search is cleared, show all posts
+                refreshBlogPosts();
+            }
+        });
+    }
+});
+
+// Function to search blog posts
+function searchBlogPosts(searchTerm) {
+    const blogPostsContainer = document.querySelector('.blog-posts');
+    const blogPostsWrapper = document.querySelector('.blog-posts-container');
+    
+    if (!blogPostsContainer || !blogPostsWrapper) return;
+    
+    // Remove any existing search header
+    const existingHeader = document.querySelector('.search-results-header');
+    if (existingHeader) {
+        existingHeader.remove();
+    }
+    
+    // Create a search results header
+    const searchHeader = document.createElement('div');
+    searchHeader.className = 'search-results-header';
+    searchHeader.innerHTML = `<h2>Search Results for "${searchTerm}"</h2>`;
+    
+    // Filter posts that match the search term
+    const filteredPosts = blogPosts.filter(post => {
+        return (
+            post.title.toLowerCase().includes(searchTerm) ||
+            post.content.toLowerCase().includes(searchTerm) ||
+            post.tags.some(tag => tag.toLowerCase().includes(searchTerm)) ||
+            post.category.toLowerCase().includes(searchTerm)
+        );
+    });
+    
+    // Clear the container
+    blogPostsContainer.innerHTML = '';
+    
+    // Add the search header before the blog posts container
+    blogPostsWrapper.insertBefore(searchHeader, blogPostsContainer);
+    
+    if (filteredPosts.length === 0) {
+        // No results found
+        const noResults = document.createElement('div');
+        noResults.className = 'no-search-results';
+        noResults.innerHTML = `
+            <p>No posts found matching "${searchTerm}".</p>
+            <button class="modal-btn modal-btn-primary" onclick="refreshBlogPosts()">Show All Posts</button>
+        `;
+        blogPostsContainer.appendChild(noResults);
+        return;
+    }
+    
+    // Add each matching post to the container
+    filteredPosts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = 'blog-card';
+        
+        // Create excerpt
+        const excerpt = post.content.length > 150 
+            ? post.content.substring(0, 150) + '...' 
+            : post.content;
+        
+        // Format tags as hashtags
+        const tagHtml = post.tags.map(tag => `<span class="blog-tag">#${tag}</span>`).join(' ');
+        
+        // Highlight the search term in the title and excerpt
+        const highlightedTitle = highlightText(post.title, searchTerm);
+        const highlightedExcerpt = highlightText(excerpt, searchTerm);
+        
+        postElement.innerHTML = `
+            <div class="blog-card-img">
+                <img src="${post.image}" alt="${post.title}" onerror="this.onerror=null; this.src='https://picsum.photos/800/500';">
+            </div>
+            <div class="blog-card-content">
+                <div class="blog-card-meta">
+                    <span>By ${post.author}</span>
+                    <span>${post.date}</span>
+                </div>
+                <div class="blog-card-tags">
+                    ${tagHtml}
+                </div>
+                <h3>${highlightedTitle}</h3>
+                <p>${highlightedExcerpt}</p>
+                <div class="blog-card-actions">
+                    <button class="blog-card-btn" onclick="openViewPostModal(${post.id})">Read More</button>
+                    <button class="blog-card-btn secondary" onclick="openEditModal(${post.id})">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="blog-card-btn delete" onclick="confirmDeletePost(${post.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="blog-card-stats">
+                    <span class="like-btn" onclick="toggleLike(${post.id})">
+                        <i class="far fa-heart"></i> ${post.likes}
+                    </span>
+                    <span>
+                        <i class="far fa-comment"></i> ${post.comments.length}
+                    </span>
+                </div>
+            </div>
+        `;
+        
+        blogPostsContainer.appendChild(postElement);
+    });
+}
+
+// Helper function to highlight search terms in text
+function highlightText(text, searchTerm) {
+    if (!searchTerm) return text;
+    
+    const regex = new RegExp(`(${searchTerm})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+}

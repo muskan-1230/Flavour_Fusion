@@ -1,0 +1,115 @@
+/* Global styles for elements that should appear on all pages */
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    background-color: var(--bg-primary, #ffffff);
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: modalFadeIn 0.3s;
+}
+
+.modal-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color, #e0e0e0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-primary, #ffffff);
+    z-index: 1;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--text-primary, #333333);
+    font-size: 1.5rem;
+}
+
+.modal-close {
+    color: var(--text-secondary, #666666);
+    font-size: 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: var(--primary-color, #ff6b6b);
+}
+
+.modal-body {
+    padding: 1.5rem;
+    color: var(--text-primary, #333333);
+}
+
+/* About modal specific styles */
+.about-section {
+    padding: 0.5rem;
+}
+
+.about-logo {
+    display: block;
+    max-width: 150px;
+    margin: 0 auto 2rem auto;
+}
+
+.about-section h3 {
+    color: var(--primary-color, #ff6b6b);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.about-section p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.about-section ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.about-section li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .modal-content {
+    background-color: var(--bg-primary, #222222);
+}
+
+:root[data-theme="dark"] .modal-header {
+    background-color: var(--bg-primary, #222222);
+} 
