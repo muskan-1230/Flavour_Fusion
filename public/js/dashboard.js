@@ -63,4 +63,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Call loadFavorites when page loads
     loadFavorites();
+    loadRecipeOfDay();
 });

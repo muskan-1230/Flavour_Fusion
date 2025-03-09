@@ -7,8 +7,8 @@
     --font-secondary: 'Montserrat', sans-serif;
     
     /* Existing variables */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f4f4f4;
+    --bg-primary: #f8f5f2; /* Changed from white to a soft cream/beige */
+    --bg-secondary: #f0ebe6; /* Slightly darker version for secondary backgrounds */
     --text-primary: #333333;
     --text-secondary: #666666;
     --accent-color: #4a90e2;
