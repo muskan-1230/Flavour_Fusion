@@ -434,6 +434,48 @@
         }
       ],
       "comments": []
+    },
+    {
+      "id": "1741574598168",
+      "title": "Pesto pasta",
+      "description": "Pasto Pasta is a restaurant or brand (depending on the context) that likely specializes in Italian cuisine, particularly pasta dishes. The name \"Pasto\" comes from the Italian word for \"meal,\" suggesting a focus on authentic and delicious Italian food experiences.",
+      "ingredients": [
+        "✅ 250g pasta (spaghetti, penne, or fusilli)",
+        "✅ 2 cups fresh basil leaves",
+        "✅ ¼ cup pine nuts (or walnuts/almonds)",
+        "✅ 2 cloves garlic",
+        "✅ ½ cup grated parmesan cheese",
+        "✅ ⅓ cup olive oil",
+        "✅ Salt & black pepper (to taste)",
+        "✅ ½ tsp red chili flakes (optional)",
+        "✅ ½ lemon (optional, for added freshness)"
+      ],
+      "instructions": [
+        "Instructions",
+        "1️⃣ Cook the Pasta:",
+        "Boil water in a large pot, add salt, and cook pasta until al dente. Reserve ½ cup pasta water before draining.",
+        "2️⃣ Make the Pesto Sauce:",
+        "In a blender or food processor, add basil, nuts, garlic, parmesan, salt, and pepper.",
+        "Pulse a few times, then slowly add olive oil while blending until smooth.",
+        "Adjust seasoning and add a squeeze of lemon juice for extra freshness.",
+        "3️⃣ Combine:",
+        "Toss the drained pasta with the pesto sauce.",
+        "If needed, add a splash of reserved pasta water to make it creamy.",
+        "4️⃣ Serve & Garnish:",
+        "Sprinkle extra parmesan and chili flakes.",
+        "Serve warm and enjoy!",
+        "💡 Tips:",
+        "✔️ Toast the nuts slightly for a richer flavor.",
+        "✔️ Store extra pesto in an airtight jar with a thin layer of olive oil on top to prevent oxidation."
+      ],
+      "prepTime": "40",
+      "dietaryType": "veg",
+      "image": "/uploads/1741574598162-490939995-pesto pasta.jpeg",
+      "author": "muskan",
+      "authorId": "muskan.aanu@gmail.com",
+      "createdAt": "2025-03-10T02:43:18.168Z",
+      "ratings": [],
+      "comments": []
     }
   ]
 }
