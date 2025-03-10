@@ -187,6 +187,16 @@
           "userId": "kannan@gmail.com",
           "rating": 5,
           "createdAt": "2025-03-09T07:56:18.759Z"
+        },
+        {
+          "userId": "muskan.aanu@gmail.com",
+          "rating": 4,
+          "createdAt": "2025-03-10T04:00:52.077Z"
+        },
+        {
+          "userId": "muskan.aanu@gmail.com",
+          "rating": 4,
+          "createdAt": "2025-03-10T04:01:37.334Z"
         }
       ],
       "comments": [
@@ -194,6 +204,11 @@
           "author": "Ankit2106",
           "text": "Nice is a good recipe.",
           "createdAt": "2025-03-08T17:08:50.877Z"
+        },
+        {
+          "author": "muskan",
+          "text": "This is like a authentic restaurant recipe.",
+          "createdAt": "2025-03-10T04:02:39.445Z"
         }
       ]
     },
@@ -474,8 +489,25 @@
       "author": "muskan",
       "authorId": "muskan.aanu@gmail.com",
       "createdAt": "2025-03-10T02:43:18.168Z",
-      "ratings": [],
-      "comments": []
+      "ratings": [
+        {
+          "userId": "muskan.aanu@gmail.com",
+          "rating": 3,
+          "createdAt": "2025-03-10T04:03:07.282Z"
+        },
+        {
+          "userId": "muskan.aanu@gmail.com",
+          "rating": 5,
+          "createdAt": "2025-03-10T04:03:09.108Z"
+        }
+      ],
+      "comments": [
+        {
+          "author": "muskan",
+          "text": "Awesome pasta recipe!!",
+          "createdAt": "2025-03-10T04:03:27.502Z"
+        }
+      ]
     }
   ]
 }
